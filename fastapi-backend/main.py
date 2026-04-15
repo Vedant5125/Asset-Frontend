@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from db.mongodb import connect_to_mongo, close_mongo_connection
 from routes import auth, assets, finance
 from core.config import settings
+load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
