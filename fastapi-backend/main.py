@@ -7,7 +7,12 @@ from core.config import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await connect_to_mongo()
+    try:
+        print("Connecting to MongoDB...")
+        await connect_to_mongo()
+        print("MongoDB connected ✅")
+    except Exception as e:
+        print("MongoDB connection failed ❌", e)
     yield
     await close_mongo_connection()
 
